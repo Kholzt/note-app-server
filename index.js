@@ -9,12 +9,9 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["https://noteme-123.vercel.app", "http://localhost:9000"],
+    origin: "*",
     method: ["GET", "POST"],
-    transports: ["websocket", "polling"],
-    credentials: true,
   },
-  allowEIO3: true,
 });
 
 io.on("connection", (socket) => {
