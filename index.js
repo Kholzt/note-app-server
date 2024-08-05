@@ -11,8 +11,12 @@ const io = new Server(server, {
   cors: {
     origin: ["https://noteme-123.vercel.app", "http://localhost:9000"],
     method: ["GET", "POST"],
+    transports: ["websocket", "polling"],
+    credentials: true,
   },
+  allowEIO3: true,
 });
+
 io.on("connection", (socket) => {
   console.log(`Client ${socket.id} connected`);
 
