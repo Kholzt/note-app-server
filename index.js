@@ -9,7 +9,7 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://noteme-123.vercel.app",
+    origin: ["https://noteme-123.vercel.app", "http://localhost:9000"],
     method: ["GET", "POST"],
   },
 });
