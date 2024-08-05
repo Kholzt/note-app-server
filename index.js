@@ -67,7 +67,6 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
   },
 });
-res.socket.server.io = io;
 io.on("connection", (socket) => {
   console.log(`Client ${socket.id} connected`);
 
