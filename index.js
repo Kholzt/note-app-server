@@ -60,7 +60,6 @@ const server = http.createServer(app);
 // });
 
 const io = new Server(server, {
-  path: "/api/socket",
   addTrailingSlash: false,
   cors: {
     origin: "*", // Consider restricting this in production
