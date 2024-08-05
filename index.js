@@ -5,12 +5,18 @@ const cors = require("cors");
 const http = require("http");
 const { Server } = require("socket.io");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*", // Consider restricting this in production
+    methods: ["GET", "POST"],
+  })
+);
+
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*",
-    method: ["GET", "POST"],
+    origin: "*", // Consider restricting this in production
+    methods: ["GET", "POST"],
   },
 });
 
@@ -19,14 +25,23 @@ io.on("connection", (socket) => {
 
   socket.on("privateRoom", (userId) => {
     socket.join(userId);
-    console.log("join room" + userId);
+    console.log(`Client ${socket.id} joined room ${userId}`);
   });
 
   socket.on("addNote", (userId) => {
-    socket.broadcast.to(userId).emit("getNote", "Message from server");
+    try {
+      socket.broadcast.to(userId).emit("getNote", "Message from server");
+    } catch (error) {
+      console.error("Error emitting addNote:", error);
+    }
   });
+
   socket.on("deleteNote", (userId) => {
-    socket.broadcast.to(userId).emit("getNote");
+    try {
+      socket.broadcast.to(userId).emit("getNote");
+    } catch (error) {
+      console.error("Error emitting deleteNote:", error);
+    }
   });
 
   socket.on("disconnect", () => {
