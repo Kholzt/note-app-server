@@ -61,7 +61,6 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   path: "/socket",
-  wsEngine: ["ws", "wss"],
   transports: ["websocket", "polling"],
   cors: {
     origin: "*", // Consider restricting this in production
