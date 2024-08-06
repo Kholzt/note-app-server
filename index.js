@@ -60,8 +60,6 @@ const server = http.createServer(app);
 // });
 
 const io = new Server(server, {
-  addTrailingSlash: false,
-  transports: ["websocket", "polling"],
   cors: {
     origin: "*", // Consider restricting this in production
     methods: ["GET", "POST"],
